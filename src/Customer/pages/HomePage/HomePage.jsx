@@ -8,12 +8,13 @@ const HomePage = () => {
     <>
         <MainCarousel/>
         <div className='space-y-10 py-20 '>
-            <HomeSectionCarousel data={mens_kurta}/>
-            <HomeSectionCarousel data={mens_kurta}/>
-            <HomeSectionCarousel data={mens_kurta}/>
-            <HomeSectionCarousel data={mens_kurta}/>
-            <HomeSectionCarousel data={mens_kurta}/>
-            <HomeSectionCarousel data={mens_kurta}/>
+            
+            <HomeSectionCarousel data={mens_kurta} SectionName={"Mens Kurta"}/>
+            <HomeSectionCarousel data={mens_kurta} SectionName={"Mens Shoes"}/>
+            <HomeSectionCarousel data={mens_kurta} SectionName={"Mens Shirt"}/>
+            <HomeSectionCarousel data={mens_kurta} SectionName={"Womens Saree"}/>
+            <HomeSectionCarousel data={mens_kurta} SectionName={"Womens Shoes"}/>
+            
         </div>
     </>
   )

@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import HomeSectionCard from "../HomeSectionCard/HomeSectionCard";
 
-const HomeSectionCarousel = ({data}) => {
+const HomeSectionCarousel = ({data,SectionName}) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const carouselRef = useRef(null);
 
@@ -38,7 +38,10 @@ const HomeSectionCarousel = ({data}) => {
     };
 
     return (
-        <div className="relative px-4 lg:px-8 border shadow-lg">
+        <div className="relative px-4 lg:px-8 border ">
+        <h2 className="text-2xl font-extrabold text-gray-800 py-5  px-3 text-left">
+          {SectionName}
+        </h2>
             <div className="relative p-5">
                 <AliceCarousel
                     ref={carouselRef}
@@ -58,7 +61,7 @@ const HomeSectionCarousel = ({data}) => {
                     onClick={slideNext}
                     sx={{
                         position: "absolute",
-                        top: "8rem",
+                        top: "13rem",
                         right: "2rem",
                         transform: "translateX(10%) rotate(90deg)",
                         bgcolor: "white",
@@ -78,7 +81,7 @@ const HomeSectionCarousel = ({data}) => {
                     onClick={slidePrev}
                     sx={{
                         position: "absolute",
-                        top: "8rem",
+                        top: "13rem",
                         left: "2rem",
                         transform: "translateX(-50%) rotate(-90deg)",
                         bgcolor: "white",
