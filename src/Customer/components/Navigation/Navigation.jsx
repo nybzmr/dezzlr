@@ -367,7 +367,7 @@ export default function Navigation() {
                 <img
                   src="DezzlrLogo.png"
                   alt="Dezzlr"
-                  className="h-20 w-20 mr-2"
+                  className="h-16 w-full mr-2"
                 />
               </div>
 
