@@ -1,6 +1,7 @@
 
 import './App.css';
 import Cart from './Customer/components/Cart/Cart';
+import Checkout from './Customer/components/Checkout/Checkout';
 import Footer from './Customer/components/Footer/Footer';
 import Navigation from './Customer/components/Navigation/Navigation';
 import Product from './Customer/components/Product/Product';
@@ -12,10 +13,11 @@ function App() {
     <div className="App">
       <Navigation/>
       <div>
-        {/* <HomePage/> */}
+        <HomePage/>
         {/* <Product/> */}
         {/* <ProductDetails/> */}
-        <Cart/>
+        {/* <Cart/> */}
+        {/* <Checkout/> */}
       </div>
       <Footer/>
     </div>
