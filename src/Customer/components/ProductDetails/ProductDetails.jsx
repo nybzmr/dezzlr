@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import ProductReviewCard from "./ProductReviewCard";
 import { mens_kurta } from "../../../Data/mens_kurta";
 import HomeSectionCard from "../HomeSectionCard/HomeSectionCard";
+import { useNavigate } from "react-router-dom";
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -64,7 +65,12 @@ function classNames(...classes) {
 export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
-
+  
+  const navigate = useNavigate()
+  
+  const handleAddToCartClick=()=>{
+    navigate("/cart")
+  }
   return (
     <div className="bg-white text-left">
       <div className="pt-6">
@@ -244,6 +250,7 @@ export default function ProductDetails() {
                 </button> */}
 
                 <Button
+                  onClick={handleAddToCartClick}
                   variant="contained"
                   sx={{
                     mt: 2.5,
@@ -387,7 +394,7 @@ export default function ProductDetails() {
         </section>
         {/* similar products */}
         <section className="pt-10">
-          <h1 className="py-5 text-xl font-bold">Similar Products</h1>
+          <h1 className="py-5 text-3xl mx-20 mb-10 font-bold">Similar Products</h1>
           <div className="flex flex-wrap justify-center space-y-5">
             {mens_kurta.map((item)=><HomeSectionCard product={item}/>)}
           </div>
