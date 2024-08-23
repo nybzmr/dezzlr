@@ -1,25 +1,31 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 
-
-const addressSchema = new Schema({
+const addressSchema = new mongoose.Schema({
   street: { type: String, required: true },
   city: { type: String, required: true },
   state: { type: String, required: true },
   pinCode: { type: String, required: true },
 });
 
-const orderSchema = new Schema({
+const orderSchema = new mongoose.Schema({
   orderDate: { type: Date, default: Date.now },
   items: [
     {
-      product: { type: Schema.Types.ObjectId, ref: "Product", required: true },
+      product: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
       quantity: { type: Number, required: true },
       price: { type: Number, required: true },
     },
   ],
   totalAmount: { type: Number, required: true },
+});
+
+const cartItemSchema = new mongoose.Schema({
+  product: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
+  quantity: { type: Number, required: true },
+  addedAt: { type: Date, default: Date.now },
 });
 
 const userSchema = new mongoose.Schema(
@@ -41,13 +47,14 @@ const userSchema = new mongoose.Schema(
     },
 
     mobile: {
-      type: String,
-      unique: true,
+      type: String, 
     },
 
     addresses: [addressSchema],
 
     orders: [orderSchema],
+
+    cart: [cartItemSchema],
 
     password: {
       type: String,
@@ -65,7 +72,7 @@ const userSchema = new mongoose.Schema(
 
 userSchema.pre("save",async function(next){
     if(!this.isModified("password")) return next();
-    this.password=bcrypt.hash(this.password,10);
+    this.password= await bcrypt.hash(this.password,10);
     next();
 });
 
