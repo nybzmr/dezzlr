@@ -55,6 +55,8 @@ const userSchema = new mongoose.Schema(
     orders: [orderSchema],
 
     cart: [cartItemSchema],
+    seller: { type: mongoose.Schema.Types.ObjectId, ref: 'Seller' },
+    isSeller: { type: Boolean, default: false }, 
 
     password: {
       type: String,

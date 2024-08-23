@@ -15,4 +15,8 @@ app.use(cookieParser());
 
 import userRouter from "./routes/user.routes.js";
 app.use("/api/users",userRouter);
+
+import sellerRouter from "./routes/seller.routes.js";
+app.use("/api/sellers",sellerRouter);
+
 export default app;

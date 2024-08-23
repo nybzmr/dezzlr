@@ -94,5 +94,44 @@ const refreshAccessToken= asyncHandler(async(req,res)=>{
     }
 
 
-})
-export { registerUser,loginUser,logoutUser,refreshAccessToken };
+});
+
+const addUserDetails = asyncHandler(async (req, res) => {
+    const userId = req.user._id; 
+    const { mobile, address } = req.body;
+
+    const user = await User.findById(userId);
+    if (!user) {
+        return res.status(404).json(new ApiError(404, "User not found"));
+    }
+    if (!mobile && !user.mobile ) {
+
+        return res.status(400).json(new ApiError(400, "No contact details provided"));
+    }
+    else if(!(address && user.mobile)){
+        return res.status(400).json(new ApiError(400, "No contact details provided"));
+    }
+
+
+    if (mobile) {
+        user.mobile = mobile;
+    }
+
+    if (address) {
+        const { street, city, state, pinCode } = address;
+        if (street && city && state && pinCode) {
+            user.addresses.push({ street, city, state, pinCode });
+        } else {
+            return res.status(400).json(new ApiError(400, "Incomplete address details"));
+        }
+    }
+
+    await user.save();
+
+    return res.status(200).json(new ApiResponse(200, "Contact details updated successfully", {
+        mobile: user.mobile,
+        addresses: user.addresses,
+    }));
+});
+    
+export { registerUser,loginUser,logoutUser,refreshAccessToken,addUserDetails };
