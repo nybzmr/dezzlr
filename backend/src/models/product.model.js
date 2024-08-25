@@ -22,7 +22,7 @@ const productSchema = new mongoose.Schema(
             trim: true,
         },
         category: { type: String, required: true },
-        seller: { type: Schema.Types.ObjectId, ref: 'Seller', required: true },
+        seller: { type: mongoose.Schema.Types.ObjectId, ref: 'Seller', required: true },
         imageUrl: {
             type: String,
             required: true,

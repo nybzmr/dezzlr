@@ -50,20 +50,17 @@ const addSeller = asyncHandler(async (req, res) => {
 });
 
 const getSellerDetails = asyncHandler(async (req, res) => {
-    const userId = req.user._id; 
-  
-    try {
-      const user = await User.findById(userId).populate('seller'); 
-      if (!user) {
-        return res.status(404).json(new ApiError(404, "User not found"));
-      }
-      if (!user.isSeller) {
-        return res.status(400).json(new ApiError(400, "User is not a seller"));
-      }
-      return res.status(200).json(new ApiResponse(200, "Seller details fetched successfully", user.seller));
-    } catch (error) {
-      return res.status(500).json(new ApiError(500, error.message));
-    }
-  });
+  const userId = req.user._id; 
+  const user= await User.findById(userId);
+  const sellerId=user.seller;
+
+  const seller = await Seller.findById(sellerId ).populate("products");
+
+  if (!seller) {
+      return res.status(404).json(new ApiError(404, "Seller not found"));
+  }
+
+  return res.status(200).json(new ApiResponse(200, "Seller details fetched successfully", seller));
+});
 
 export {addSeller,getSellerDetails};
