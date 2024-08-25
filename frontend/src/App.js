@@ -9,7 +9,7 @@ import Order from './Customer/components/Order/Order';
 import OrderDetails from './Customer/components/Order/OrderDetails';
 import Product from './Customer/components/Product/Product';
 import ProductDetails from './Customer/components/ProductDetails/ProductDetails';
-import HomePage from './Customer/pages/HomePage/HomePage';
+import HomePage from './pages/HomePage/HomePage';
 import CustomerRouters from './Routers/CustomerRouters';
 
 function App() {
