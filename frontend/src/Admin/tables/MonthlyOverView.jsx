@@ -1,19 +1,19 @@
 // ** MUI Imports
-import Box from '@mui/material/Box'
-import Grid from '@mui/material/Grid'
-import Card from '@mui/material/Card'
-import Avatar from '@mui/material/Avatar'
-import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import CardContent from '@mui/material/CardContent'
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Card from '@mui/material/Card';
+import Avatar from '@mui/material/Avatar';
+import CardHeader from '@mui/material/CardHeader';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import CardContent from '@mui/material/CardContent';
 
 // ** Icons Imports
-import TrendingUp from 'mdi-material-ui/TrendingUp'
-import CurrencyUsd from 'mdi-material-ui/CurrencyUsd'
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-import CellphoneLink from 'mdi-material-ui/CellphoneLink'
-import AccountOutline from 'mdi-material-ui/AccountOutline'
+import TrendingUp from 'mdi-material-ui/TrendingUp';
+import CurrencyUsd from 'mdi-material-ui/CurrencyUsd';
+import DotsVertical from 'mdi-material-ui/DotsVertical';
+import CellphoneLink from 'mdi-material-ui/CellphoneLink';
+import AccountOutline from 'mdi-material-ui/AccountOutline';
 
 const salesData = [
   {
@@ -40,7 +40,7 @@ const salesData = [
     title: 'Revenue',
     icon: <CurrencyUsd sx={{ fontSize: '1.75rem' }} />
   }
-]
+];
 
 const renderStats = () => {
   return salesData.map((item, index) => (
@@ -65,8 +65,8 @@ const renderStats = () => {
         </Box>
       </Box>
     </Grid>
-  ))
-}
+  ));
+};
 
 const MonthlyOverview = () => {
   return (
@@ -100,7 +100,7 @@ const MonthlyOverview = () => {
         </Grid>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default MonthlyOverview
+export default MonthlyOverview;

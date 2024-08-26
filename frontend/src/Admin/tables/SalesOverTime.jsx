@@ -1,24 +1,10 @@
-// ** MUI Imports
-import Box from '@mui/material/Box'
-import Card from '@mui/material/Card'
-import Button from '@mui/material/Button'
-import { useTheme } from '@mui/material/styles'
-import CardHeader from '@mui/material/CardHeader'
-import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
-import CardContent from '@mui/material/CardContent'
-
-// ** Icons Imports
-import DotsVertical from 'mdi-material-ui/DotsVertical'
-
-// ** Custom Components Imports
+import React from 'react';
+import { Box, Card, Button, Typography, IconButton, CardHeader, CardContent, useTheme } from '@mui/material';
+import DotsVertical from 'mdi-material-ui/DotsVertical';
 import ReactApexCharts from 'react-apexcharts';
 
-// import ReactApexcharts from 'src/@core/components/react-apexcharts'
-
 const SalesOverTime = () => {
-  // ** Hook
-  const theme = useTheme()
+  const theme = useTheme();
 
   const options = {
     chart: {
@@ -58,12 +44,8 @@ const SalesOverTime = () => {
       theme.palette.background.default
     ],
     states: {
-      hover: {
-        filter: { type: 'none' }
-      },
-      active: {
-        filter: { type: 'none' }
-      }
+      hover: { filter: { type: 'none' } },
+      active: { filter: { type: 'none' } }
     },
     xaxis: {
       categories: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -77,17 +59,17 @@ const SalesOverTime = () => {
       tickAmount: 4,
       labels: {
         offsetX: -17,
-        formatter: value => `${value > 999 ? `${(value / 1000).toFixed(0)}` : value}k`
+        formatter: value => `${value > 999 ? `${(value / 1000).toFixed(0)}k` : value}`
       }
     }
-  }
+  };
 
   return (
     <Card>
       <CardHeader
         title='Sales Over Time'
         titleTypographyProps={{
-          sx: { lineHeight: '0.5rem !important', letterSpacing: '0.15px !important' }
+          sx: { lineHeight: '1.5rem', letterSpacing: '0.15px' }
         }}
         action={
           <IconButton size='small' aria-label='settings' className='card-more-options' sx={{ color: 'text.secondary' }}>
@@ -96,19 +78,26 @@ const SalesOverTime = () => {
         }
       />
       <CardContent sx={{ '& .apexcharts-xcrosshairs.apexcharts-active': { opacity: 0 } }}>
-        <ReactApexCharts  type='bar' height={274} options={options} series={[{ data: [37, 57, 45, 75, 57, 40, 65] }]} />
+        <ReactApexCharts
+          type='bar'
+          height={274}
+          options={options}
+          series={[{ data: [37, 57, 45, 75, 57, 40, 65] }]}
+        />
         <Box sx={{ mb: 5, display: 'flex', alignItems: 'center' }}>
           <Typography variant='h5' sx={{ mr: 4 }}>
             45%
           </Typography>
-          <Typography variant='body2'>Your sales performance is 45% 😎 better compared to last month</Typography>
+          <Typography variant='body2'>
+            Your sales performance is 45% 😎 better compared to last month
+          </Typography>
         </Box>
         <Button fullWidth variant='contained'>
           Details
         </Button>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default SalesOverTime
+export default SalesOverTime;

@@ -1,11 +1,11 @@
 // ** MUI Imports
-import Box from '@mui/material/Box'
-import Card from '@mui/material/Card'
-import { styled } from '@mui/material/styles'
-import CardHeader from '@mui/material/CardHeader'
-import Typography from '@mui/material/Typography'
-import CardContent from '@mui/material/CardContent'
-import MuiDivider from '@mui/material/Divider'
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import { styled } from '@mui/material/styles';
+import CardHeader from '@mui/material/CardHeader';
+import Typography from '@mui/material/Typography';
+import CardContent from '@mui/material/CardContent';
+import MuiDivider from '@mui/material/Divider';
 
 const depositData = [
   {
@@ -48,7 +48,7 @@ const depositData = [
     subtitle: 'Wallet deposit',
     logo: '/images/logos/citi-bank.png'
   }
-]
+];
 
 const withdrawData = [
   {
@@ -91,7 +91,7 @@ const withdrawData = [
     logo: '/images/logos/aws.png',
     subtitle: 'Choosing a Cloud Platform'
   }
-]
+];
 
 // Styled Divider component
 const Divider = styled(MuiDivider)(({ theme }) => ({
@@ -102,7 +102,7 @@ const Divider = styled(MuiDivider)(({ theme }) => ({
     margin: theme.spacing(0, 5),
     borderBottom: `1px solid ${theme.palette.divider}`
   }
-}))
+}));
 
 const DepositWithdraw = () => {
   return (
@@ -118,36 +118,34 @@ const DepositWithdraw = () => {
           }}
         />
         <CardContent sx={{ pb: theme => `${theme.spacing(5.5)} !important` }}>
-          {depositData.map((item, index) => {
-            return (
-              <Box
-                key={item.title}
-                sx={{ display: 'flex', alignItems: 'center', mb: index !== depositData.length - 1 ? 4.5 : 0 }}
-              >
-                <Box sx={{ minWidth: 38, display: 'flex', justifyContent: 'center' }}>
-                  <img src={item.logo} alt={item.title} width={item.logoWidth} height={item.logoHeight} />
-                </Box>
-                <Box
-                  sx={{
-                    ml: 4,
-                    width: '100%',
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    alignItems: 'center',
-                    justifyContent: 'space-between'
-                  }}
-                >
-                  <Box sx={{ marginRight: 2, display: 'flex', flexDirection: 'column' }}>
-                    <Typography sx={{ fontWeight: 600, fontSize: '0.875rem' }}>{item.title}</Typography>
-                    <Typography variant='caption'>{item.subtitle}</Typography>
-                  </Box>
-                  <Typography variant='subtitle2' sx={{ fontWeight: 600, color: 'success.main' }}>
-                    {item.amount}
-                  </Typography>
-                </Box>
+          {depositData.map((item, index) => (
+            <Box
+              key={item.title}
+              sx={{ display: 'flex', alignItems: 'center', mb: index !== depositData.length - 1 ? 4.5 : 0 }}
+            >
+              <Box sx={{ minWidth: 38, display: 'flex', justifyContent: 'center' }}>
+                <img src={item.logo} alt={item.title} width={item.logoWidth} height={item.logoHeight} />
               </Box>
-            )
-          })}
+              <Box
+                sx={{
+                  ml: 4,
+                  width: '100%',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
+                }}
+              >
+                <Box sx={{ marginRight: 2, display: 'flex', flexDirection: 'column' }}>
+                  <Typography sx={{ fontWeight: 600, fontSize: '0.875rem' }}>{item.title}</Typography>
+                  <Typography variant='caption'>{item.subtitle}</Typography>
+                </Box>
+                <Typography variant='subtitle2' sx={{ fontWeight: 600, color: 'success.main' }}>
+                  {item.amount}
+                </Typography>
+              </Box>
+            </Box>
+          ))}
         </CardContent>
       </Box>
 
@@ -164,40 +162,38 @@ const DepositWithdraw = () => {
           }}
         />
         <CardContent sx={{ pb: theme => `${theme.spacing(5.5)} !important` }}>
-          {withdrawData.map((item, index) => {
-            return (
-              <Box
-                key={item.title}
-                sx={{ display: 'flex', alignItems: 'center', mb: index !== depositData.length - 1 ? 4.5 : 0 }}
-              >
-                <Box sx={{ minWidth: 36, display: 'flex', justifyContent: 'center' }}>
-                  <img src={item.logo} alt={item.title} width={item.logoWidth} height={item.logoHeight} />
-                </Box>
-                <Box
-                  sx={{
-                    ml: 4,
-                    width: '100%',
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    alignItems: 'center',
-                    justifyContent: 'space-between'
-                  }}
-                >
-                  <Box sx={{ marginRight: 2, display: 'flex', flexDirection: 'column' }}>
-                    <Typography sx={{ fontWeight: 600, fontSize: '0.875rem' }}>{item.title}</Typography>
-                    <Typography variant='caption'>{item.subtitle}</Typography>
-                  </Box>
-                  <Typography variant='subtitle2' sx={{ fontWeight: 600, color: 'error.main' }}>
-                    {item.amount}
-                  </Typography>
-                </Box>
+          {withdrawData.map((item, index) => (
+            <Box
+              key={item.title}
+              sx={{ display: 'flex', alignItems: 'center', mb: index !== withdrawData.length - 1 ? 4.5 : 0 }}
+            >
+              <Box sx={{ minWidth: 36, display: 'flex', justifyContent: 'center' }}>
+                <img src={item.logo} alt={item.title} width={item.logoWidth} height={item.logoHeight} />
               </Box>
-            )
-          })}
+              <Box
+                sx={{
+                  ml: 4,
+                  width: '100%',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
+                }}
+              >
+                <Box sx={{ marginRight: 2, display: 'flex', flexDirection: 'column' }}>
+                  <Typography sx={{ fontWeight: 600, fontSize: '0.875rem' }}>{item.title}</Typography>
+                  <Typography variant='caption'>{item.subtitle}</Typography>
+                </Box>
+                <Typography variant='subtitle2' sx={{ fontWeight: 600, color: 'error.main' }}>
+                  {item.amount}
+                </Typography>
+              </Box>
+            </Box>
+          ))}
         </CardContent>
       </Box>
     </Card>
-  )
-}
+  );
+};
 
-export default DepositWithdraw
+export default DepositWithdraw;

@@ -10,6 +10,7 @@ import ProductDetails from '../Customer/components/ProductDetails/ProductDetails
 import Checkout from '../Customer/components/Checkout/Checkout'
 import Order from '../Customer/components/Order/Order'
 import Auth from '../login/auth'
+import AdminPannel from '../Admin/AdminPannel'
 
 const CustomerRouters = () => {
   return (
@@ -25,6 +26,7 @@ const CustomerRouters = () => {
             <Route path='/product/:productId' element={<ProductDetails/>}></Route>
             <Route path='/checkout' element={<Checkout/>}></Route>
             <Route path='/account/order' element={<Order/>}></Route>
+            <Route path='/adminpanel' element={<AdminPannel/>}></Route>
             <Route path='account/order/:orderId' element={<OrderDetails/>}></Route>
         </Routes>
         <div>
