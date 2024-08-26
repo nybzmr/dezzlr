@@ -5,6 +5,9 @@ import { Product } from "../models/product.model.js";
 import { Seller } from "../models/seller.model.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
+import { OAuth2Client } from 'google-auth-library';
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const registerUser = asyncHandler(async (req, res) => {
     const { fullname, email, password } = req.body;
@@ -64,6 +67,42 @@ const logoutUser = asyncHandler(async (req, res) => {
     }
     return res.status(200).clearCookie("accessToken",options).clearCookie("refreshToken",options).json(new ApiResponse(200, "User logged out"));
 });
+
+const googleLogin = asyncHandler(async (req, res) => {
+    const { tokenId } = req.body;
+
+    const ticket = await client.verifyIdToken({
+        idToken: tokenId,
+        audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const { email, name } = ticket.getPayload();
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+        user = await User.create({ fullname: name, email, password: null });
+    }
+
+    const accessToken = await user.generateAccessToken();
+    const refreshToken = await user.generateRefreshToken();
+
+    user.refreshToken = refreshToken;
+    await user.save({ validateBeforeSave: false });
+
+    const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
+
+    const options = {
+        httpOnly: true,
+        secure: true,
+    };
+
+    return res.status(200)
+        .cookie("accessToken", accessToken, options)
+        .cookie("refreshToken", refreshToken, options)
+        .json(new ApiResponse(200, "User logged in via Google", { loggedInUser }));
+});
+
 
 
 const refreshAccessToken= asyncHandler(async(req,res)=>{
@@ -228,4 +267,4 @@ const placeOrder = asyncHandler(async (req, res) => {
     return res.status(201).json(new ApiResponse(201, "Order placed successfully", order));
 });
     
-export { registerUser,loginUser,logoutUser,refreshAccessToken,addUserDetails,getCartDetails,placeOrder};
+export { registerUser,loginUser,logoutUser,refreshAccessToken,addUserDetails,getCartDetails,placeOrder,googleLogin};

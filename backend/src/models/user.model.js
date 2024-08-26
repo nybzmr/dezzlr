@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-
 const addressSchema = new mongoose.Schema({
   street: { type: String, required: true },
   city: { type: String, required: true },
@@ -14,7 +13,11 @@ const orderSchema = new mongoose.Schema({
   orderDate: { type: Date, default: Date.now },
   items: [
     {
-      product: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
+      product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+        required: true,
+      },
       quantity: { type: Number, required: true },
       price: { type: Number, required: true },
     },
@@ -23,7 +26,11 @@ const orderSchema = new mongoose.Schema({
 });
 
 const cartItemSchema = new mongoose.Schema({
-  product: { type: mongoose.Schema.Types.ObjectId, ref: "Product", required: true },
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Product",
+    required: true,
+  },
   quantity: { type: Number, required: true },
   addedAt: { type: Date, default: Date.now },
 });
@@ -47,7 +54,7 @@ const userSchema = new mongoose.Schema(
     },
 
     mobile: {
-      type: String, 
+      type: String,
     },
 
     addresses: [addressSchema],
@@ -55,8 +62,8 @@ const userSchema = new mongoose.Schema(
     orders: [orderSchema],
 
     cart: [cartItemSchema],
-    seller: { type: mongoose.Schema.Types.ObjectId, ref: 'Seller' },
-    isSeller: { type: Boolean, default: false }, 
+    seller: { type: mongoose.Schema.Types.ObjectId, ref: "Seller" },
+    isSeller: { type: Boolean, default: false },
 
     password: {
       type: String,
@@ -64,48 +71,48 @@ const userSchema = new mongoose.Schema(
 
     refreshToken: {
       type: String,
-    }
-
+    },
   },
   {
     timestamps: true,
   }
 );
 
-userSchema.pre("save",async function(next){
-    if(!this.isModified("password")) return next();
-    this.password= await bcrypt.hash(this.password,10);
-    next();
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  if (this.password) {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+  next();
 });
 
-userSchema.methods.matchPassword=async function(password){
-    return await bcrypt.compare(password,this.password);
+userSchema.methods.matchPassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
 };
 
-userSchema.methods.generateAccessToken=async function(){
-    return await jwt.sign(
-        {
-            _id:this._id,
-            email:this.email,
-            fullname:this.fullname
-        },
-        process.env.ACCESS_TOKEN_SECRET,
-        {
-            expiresIn:process.env.ACCESS_TOKEN_EXPIRY
-        }
-    );
+userSchema.methods.generateAccessToken = async function () {
+  return await jwt.sign(
+    {
+      _id: this._id,
+      email: this.email,
+      fullname: this.fullname,
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
+    }
+  );
 };
-userSchema.methods.generateRefreshToken=async function(){
-    return await jwt.sign(
-        {
-            _id:this._id,
-        },
-        process.env.REFRESH_TOKEN_SECRET,
-        {
-            expiresIn:process.env.REFRESH_TOKEN_EXPIRY
-        }
-    );
+userSchema.methods.generateRefreshToken = async function () {
+  return await jwt.sign(
+    {
+      _id: this._id,
+    },
+    process.env.REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
+    }
+  );
 };
-
 
 export const User = mongoose.model("User", userSchema);
