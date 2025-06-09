@@ -1,6 +1,6 @@
-# Ecommerce Website
+# Dezzlr Website
 
-This project is a complete Ecommerce platform developed using the MERN stack, comprising MongoDB, Express.js, React, and Node.js.
+This project is a complete Dezzlr platform developed using the MERN stack, comprising MongoDB, Express.js, React, and Node.js.
 
 ## Features
 
