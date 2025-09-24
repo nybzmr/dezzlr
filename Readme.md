@@ -1,42 +1,111 @@
-# Dezzlr Website
+# Dezzlr
 
-This project is a complete Dezzlr platform developed using the MERN stack, comprising MongoDB, Express.js, React, and Node.js.
+## Description
 
-## Features
+An ecommerce store built with MERN stack, and utilizes third party API's. This ecommerce store enable three main different flows or implementations:
 
-* **User Authentication:** Secure login and registration for users.
-* **Product Management:** Efficient product listings with detailed views.
-* **Shopping Cart:** Add, remove, and modify items seamlessly.
-* **Checkout Process:** Smooth and secure checkout experience.
+1. Buyers browse the store categories, products and brands
+2. Sellers or Merchants manage their own brand component
+3. Admins manage and control the entire store components 
 
-## Tech Stack
+### Features:
 
-* **Frontend:** React
-* **Backend:** Node.js, Express.js
-* **Database:** MongoDB
+  * Node provides the backend environment for this application
+  * Express middleware is used to handle requests, routes
+  * Mongoose schemas to model the application data
+  * React for displaying UI components
+  * Redux to manage application's state
+  * Redux Thunk middleware to handle asynchronous redux actions
 
-## Installation
+## Demo
 
-1. Clone the repository:
+This application is deployed on Vercel Please check it out :smile: [here](https://dezzlr.vercel.app).
 
-   ```bash
-   git clone https://github.com/nyzbmr/dezzlr.git
-   ```
+## Docker Guide
 
-2. Navigate to the project directory:
+To run this project locally you can use docker compose provided in the repository. Here is a guide on how to run this project locally using docker compose.
 
-   ```bash
-   cd server
-   ```
+Clone the repository
+```
+git clone https://github.com/nybzmr/dezzlr.git
+```
 
-3. Install dependencies:
+Edit the dockercompose.yml file and update the the values for MONGO_URI and JWT_SECRET
 
-   ```bash
-   npm install
-   ```
+Then simply start the docker compose:
 
-4. Run the application:
+```
+docker-compose build
+docker-compose up
+```
 
-   ```bash
-   npm start
-   ```
+## Database Seed
+
+* The seed command will create an admin user in the database
+* The email and password are passed with the command as arguments
+* Like below command, replace brackets with email and password. 
+* For more information, see code [here](server/utils/seed.js)
+
+```
+npm run seed:db [email-***@****.com] [password-******] // This is just an example.
+```
+
+## Install
+
+`npm install` in the project root will install dependencies in both `client` and `server`. [See package.json](package.json)
+
+Some basic Git commands are:
+
+```
+git clone https://github.com/nybzmr/dezzlr.git
+npm install
+```
+
+## ENV
+
+Create `.env` file for both client and server. See examples:
+
+[Frontend ENV](client/.env.example)
+
+[Backend ENV](server/.env.example)
+
+
+## Start development
+
+```
+npm run dev
+```
+
+## Languages & tools
+
+- [Node](https://nodejs.org/en/)
+
+- [Express](https://expressjs.com/)
+
+- [Mongoose](https://mongoosejs.com/)
+
+- [React](https://reactjs.org/)
+
+- [Webpack](https://webpack.js.org/)
+
+
+### Code Formatter
+
+- Add a `.vscode` directory
+- Create a file `settings.json` inside `.vscode`
+- Install Prettier - Code formatter in VSCode
+- Add the following snippet:  
+
+```json
+
+    {
+      "editor.formatOnSave": true,
+      "prettier.singleQuote": true,
+      "prettier.arrowParens": "avoid",
+      "prettier.jsxSingleQuote": true,
+      "prettier.trailingComma": "none",
+      "javascript.preferences.quoteStyle": "single",
+    }
+
+```
+
